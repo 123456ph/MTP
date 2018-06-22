@@ -3,36 +3,34 @@ Matricula: 11711EEL033 */
 
 #include <stdio.h>
 int main(){
-	
-	char bits[256];
-	int n,jb,j=0,i=0;
-	
+	int nd,r;
+	int x,j=0,i=0,jb;
+	char num[256];
 	printf("Escolha uma opcao:\n1. Binario para Decimal\n2- Binario para Hexadecimal\n3- Hexadecimal para Decimal\n4. Hexadecimal para Binario\n5. Decimal para Binario\n6. Decimal para Hexadecimal\n7. Octal para Decimal\n8. Decimal para Octal\n");
-	scanf("%d",&n);
-	
-		if(n==1){
+	scanf("%d",&x);
+		if(x==1){
 		printf("Digite o numero binario: ");
-		scanf("%s",&bits);
-		for(i; bits[i]!='\0'; i++){
-			j=j*2+(bits[i]-'0');
+		scanf("%s",num);
+		for(i; num[i]!='\0'; i++){
+			j=j*2+(num[i]-'0');
 		}
 		printf("O numero decimal e: %d",j);
 
 	}
-		else if(n==2){
+		else if(x==2){
 		printf("Digite o numero binario: ");
-		scanf("%s",bits);
-		for(i; bits[i]!='\0'; i++){
-			j=j*2+(bits[i]-'0');
+		scanf("%s",num);
+		for(i; num[i]!='\0'; i++){
+			j=j*2+(num[i]-'0');
 		}
 		printf("O numero hexadecimal e: %X",j);
 	}
-		else if(n==3){
+		else if(x==3){
 		printf("Digite o numero hexadecimal: ");
 		scanf("%x",&j);
 		printf("O numero e decimal e: %d",j);
 	}
-		else if(n==4){
+		else if(x==4){
 		printf("Digite o numero hexadecimal: ");
 		scanf("%x",&j);
 		for(jb = 0; j >= (1 << jb); jb++){
@@ -51,30 +49,42 @@ int main(){
 			printf("%d", conv[i]);
 		}
 	}
-		else if(n==5){
-		printf("Digite o numero decimal: ");
-		scanf("%d",&j);
-		itoa (j,bits,2);
-		printf("O numero binario e: %s",bits);
+		else if(x==5){
+		int nb[100],n=1,j;
+		printf("Digite um numero decimal: ");
+		scanf("%d",&nd);
+		r = nd;
+		while(r!=0){
+			nb[n++]= r % 2;
+			r = r / 2;
+		}
+		printf("O numero binario e: ");
+		for(j = n -1 ;j> 0;j--)
+			printf("%d",nb[j]);
 	}
-		else if(n==6){
+		else if(x==6){
 		printf("Digite o numero decimal: ");
 		scanf("%d",&j);
-		itoa (j,bits,16);
-		printf("O numero hexadecimal e: %s",bits);
+		printf("O numero hexadecimal e: %X",j);
 		
 	}
-		else if(n==7){
+		else if(x==7){
 		printf("Digite o numero octal: ");
 		scanf("%o",&j);
 		printf("O numero decimal e: %d",j);
 		
 	}
-		else if(n==8){
-		printf("Digite o numero decimal: ");
-		scanf("%d",&j);
-		itoa (j,bits,8);
-		printf("O numero octal e: %s",bits);
+		else if(x==8){
+		int no[100],i=1,j;
+	printf("Digite um numero decimal: ");
+	scanf("%d",&nd);
+	r = nd;
+	while(r!=0){
+		no[i++]= r % 8;
+		r = r / 8;
 	}
-	return 0;
+	printf("O numero octal e: ");
+	for(j = i -1 ;j> 0;j--)
+		printf("%d",no[j]);
+	}
 }
