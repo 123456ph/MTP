@@ -1,26 +1,29 @@
 /*Paulo Henrique Marques Martins - 11711EEL033*/
+
 #include <stdio.h>
 
-int main(){
+void converter(int v[], char s[])
+{
+	int i, num=0, n;
+	for(i=0; s[i] != '\0';i++)
+	{
+		if(s[i] >= '0' && s[i] <= '9')
+		v[i] = s[i] - '0';
+	}
+	n=i;
+	for(i=0; i<n; i++)
+	{	if(s[i] >= '0' && s[i] <= '9')
+	num = num*10 + v[i];}
 	
-	char n[256];
-	int x=0,y=0;	
-	
-		printf("Digite os caracteres para o conjunto: ");
-		scanf("%s",&n);
-		getchar();
-		printf("Os numeros que estao no conjunto sao: ");
-			while(n[x]!='\0'){
-				if(n[x]>='0' && n[x]<='9'){
-					n[x]=n[x]-48;
-					printf("%d",n[x]);
-					x++;
-				}
-				else{
-					x++;
-					y++;
-				}
-			}
-			if(y==x)
-			printf("0");
+	printf("\nO numero eh: %d", num);
+	}
+
+int main()
+{
+	char s[256];
+	int v[256];
+	printf("Digite algo: ");
+	scanf("%s", s);
+	converter(v,s);
+	return 0;
 }
