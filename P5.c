@@ -1,52 +1,58 @@
 //Paulo Henrique Marques Martins - 11711EEL033
 
-#include<stdio.h>
+#include <stdio.h>
 
-int main(){
-	
-   int n;
-	
-	printf("\n1. Codificador\n\n \n2.Decodificador:\n\n");
-	scanf("%d",&n);
-	getchar();
-	
-		if(n==1){
-			char str[256];
-			int i=0,*ps;
-		
-			printf("\nO que deseja codificar:\n ");
-			gets(str);
-			fflush(stdin);
-		
-			printf("\nA codificacao ficou:\n ");
-				for(ps=(int*)str; ps < ((int *) str) + sizeof(str); ps++){
-					if(*ps == 0)
-					break;
-					printf("%d\n, ",*ps);
-				}
-		
-		}	
-		if(n==2){
-			char *pt;
-			double mat[64][9];
-			int j,k=0;
-			printf("\nO que deseja decodificar:\n ");
-				for(j = 0; j < 64; j++)		
-					scanf("%d",&mat[j]);
-						if(mat[j][k] == ' '){				
-							mat[j][k+1] = getchar();
-				
-						}
-						if(mat[j][k]=='\0'){
-						}
-			
-		
-			pt=(char*)&mat;
-				for(pt;pt<(char*)&mat+sizeof(mat);pt++){
-					if(*pt == 0)
-						break;
-				printf("%c",*pt);
-				}		
-		}
+void codificar()
+{
+	int i, j;
+	char str[256];
+	int *ps;
+	for(i=0; i<256; i++)
+	{
+		str[i]='\0';
+	}
+	printf("\n Digite algo em caracteres: ");
+	fgets(str, 256, stdin);
+	for(i=0; str[i]!='\0'; i++)
+	ps = (int*)str;
+	printf("\n O que voce digitou codificado eh: ");
+	for(j=0; j<i; j++)
+	{
+		if(*(ps+j) != 0)
+		printf("%i ", *(ps+j));
+	}
 }
 
+void decodificar()
+{
+	int vet[64], i, num;
+	char *pc;
+			pc = (char*)vet;
+			i=0; 
+			printf("\nDigite algo em numeros, aperte enter e digite 0 : ");
+			do{
+				scanf("%d", &num);
+				getchar();
+				vet[i] = num;
+				i++;
+			}while(num!=0);
+			pc = (char*)&vet;
+			printf("\n\n O que voce digitou decodificado eh: ");
+			for(i=0; i<sizeof(vet) && *(pc+i)!=0; i++)
+			{
+				printf("%c", *(pc+i));	
+			}
+}
+
+int main ()
+{
+	int opc;
+	printf("\n\n Bem vindo! \n\n 1-Codificar\n 2-Decodificar \n\n Sua opcao: ");
+	scanf("%d", &opc);
+	getchar();
+	if(opc==1)
+	codificar();
+	if(opc==2);
+	decodificar();
+return 0;
+}
