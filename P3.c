@@ -1,103 +1,122 @@
 /*Paulo Henrique Marques Martins - 11711EEL033*/
-#include<stdio.h>
 
-int main(){
-	
-	char bin[10],num[10],res[10];
-	int k=0,j=0,n=0,i=0,p,x,y,nb,a,b,dado;	
-	
-	printf("Escolha uma das opcoes:\n");
-	printf("1-NOT\n2-AND\n3-OR\n4-XOR\n5-Right Shift\n6-Left Shift\n");
-	scanf("%d",&p);
-	getchar();
-	if(p==1){
-		printf("Digite um numero: ");
-		scanf("%d",&nb);
-		getchar();
-			if(nb>0){
-			itoa(nb,bin,2);
-			while(bin[i]!='\0'){
-			if(bin[i]=='1')
-				num[i]='0';
-			else
-				num[i]='1';
-			i++;
+#include <stdio.h>
+
+void decimal_para_binario(int vet[], int numdec)
+{
+	int j = 0, k = 0, i = 0, aux, nvet[256], cont = 0, vetaux[32];
+	if(numdec > 0) 
+	{	
+		for (i = 0; numdec > 0; i++) 
+		{
+        		vet[i] = numdec % 2;
+         		numdec /=  2;
+    		}	
+		for (int j = i - 1; j >= 0; j--) printf("%d", vet[j]);
+	}
+	else if(numdec < 0) 
+	{
+		aux = ((-numdec) - 1);
+		for (i = 0; aux > 1; i++) 
+		{
+        		vet[i] = aux % 2;
+         		aux /=  2;
+         		if(aux == 1)
+         		{	
+			 	i++;
+         			vet[i] = aux;
+			}
+    		}
+    		i--;
+		for(j = 0; j < 32; j++)
+		{
+			if(j < (32 - (i+1))) nvet[j] = 0;
+			else 
+			{
+				nvet[j] = vet[i];
+				i--;
+			}	
 		}
-		for(k=0;k<i;k++){
-			j=j*2+(num[k]-'0');
-	 	}
-		
-		printf("Not %d(%s):%d(%s)",nb,bin,j,num);
- 		}
- 	else if(nb<0){
- 			x=nb;
- 			itoa(x,bin,2);
-			printf("Not %d(%s):%d(%s)",nb,bin,j,num);
- 			}
-	}
-	if(p==2){
-		printf("Digite dois numeros: ");
-		scanf("%d\n%d",&x,&y);
-		getchar();
-		for(nb = 0; n >= (1 << nb); nb++){
-		}	
-	char bin[nb];
-	for(i=0; i<nb; i++){
-		if(n%2==0){
-			bin[i]=0;
-		}else{
-			bin[i]=1;
+		for(int w = 0; w < 32; w++) 
+		{
+			if(nvet[w] == 0) vetaux[w] = 1;
+			else vetaux[w] = 0;
 		}
-		n=n/2;
+		for(k = 0; k < 32; k++) printf("%d", vetaux[k]);
 	}
-	for(j = 0; k >= (1 << j); j++){
-	}	
-	char num[j];
-	for(x=0; x<j; x++){
-		if(k%2==0){
-			num[x]=0-nb;
-		}else{
-			num[x]=1-nb;
-		}
-		x=x/2;
+}
+
+int main()
+{
+	int option, num, num_not, num_and, num_or, num_xor, num_right, num_left;
+	int vetbin1[100], vetbin2[100], vetbin3[100], a, b;
+	printf(	   "\n\nEscolha dentre as opcoes:"
+		   "\n1. NOT (~);"
+		   "\n2. AND (&);"
+		   "\n3. OR (|);"
+		   "\n4. XOR (^);"
+		   "\n5. Right Shift (>>);"
+		   "\n6. Left Shift (<<).\n");
+	scanf("%d", &option);	
+	switch(option)
+	{
+		case 1:
+			printf("Digite um numero: ");
+			scanf("%d", &num);
+			getchar();
+			num_not = ~num;
+			printf("NOT %d (", num); decimal_para_binario(vetbin1, num); printf(") :");
+			printf(" %d (", num_not); decimal_para_binario(vetbin2, num_not);
+			printf(")");
+			break;
+		case 2:
+			printf("Digite dois numeros a serem comparados: ");
+			scanf("%d\n%d", &a, &b);
+			getchar();
+			num_and = a & b;
+			printf("%d (", a); decimal_para_binario(vetbin1, a); printf(") AND ");
+			printf("%d (", b); decimal_para_binario(vetbin2, b); printf(") : ");
+			printf("%d (", num_and); decimal_para_binario(vetbin3, num_and); printf(")");
+			break;
+		case 3:
+			printf("Digite dois numeros a serem comparados: ");
+			scanf("%d\n%d", &a, &b);
+			getchar();
+			num_or = a | b;
+			printf("%d (", a); decimal_para_binario(vetbin1, a); printf(") OR ");
+			printf("%d (", b); decimal_para_binario(vetbin2, b); printf(") : ");
+			printf("%d (", num_or); decimal_para_binario(vetbin3, num_or); printf(")");
+			break;
+		case 4:
+			printf("Digite dois numeros a serem comparados: ");
+			scanf("%d\n%d", &a, &b);
+			getchar();
+			num_xor = a ^ b;
+			printf("%d (", a); decimal_para_binario(vetbin1, a); printf(") XOR ");
+			printf("%d (", b); decimal_para_binario(vetbin2, b); printf(") : ");
+			printf("%d (", num_xor); decimal_para_binario(vetbin3, num_xor); printf(")");
+			break;
+		case 5:
+			printf("Digite dois numeros a serem comparados: ");
+			scanf("%d\n%d", &a, &b);
+			getchar();
+			num_right = a >> b;
+			printf("%d (", a); decimal_para_binario(vetbin1, a); printf(") >> ");
+			printf("%d (", b); decimal_para_binario(vetbin2, b); printf(") : ");
+			printf("%d (", num_right); decimal_para_binario(vetbin3, num_right); printf(")");
+			break;
+		case 6:
+			printf("Digite dois numeros a serem comparados: ");
+			scanf("%d\n%d", &a, &b);
+			getchar();
+			num_left = a << b;
+			printf("%d (", a); decimal_para_binario(vetbin1, a); printf(") << ");
+			printf("%d (", b); decimal_para_binario(vetbin2, b); printf(") : ");
+			printf("%d (", num_left); decimal_para_binario(vetbin3, num_left); printf(")");
+			break;
+		default: 
+		    printf("Valor Invalido!");
+		    break;
 	}
-		printf("%d %d",bin,num);
-	}
-	if(p==3){
-		printf("Digite dois numero:\n");
-		scanf("%d\n%d",&nb,&a);
-		getchar();
-		printf("A | B |\n");
-			for(i=0;i<=nb;i++) {
-				a = i & nb;
-				b = (i & nb) >> j;
-				printf("%d | %d | %d\n", nb|nb);
-			}		
-	}
-	if(p==4){
-		printf("\nDigite dois numeros:\n");
-		scanf("%d\n%d",&a,&nb);
-		gtchar();
-		printf("A | B | \n");
-			for(i=0;i<=nb;i++) {
-				a = i & nb;
-				b = (i & nb) >> j;
-				printf("%X| %X | %X\n", a, nb, a^nb);
-			}		
-	}
-	if(p==5){
-		printf("Digite dois numeros:\n");
-		scanf("%d\n%d",&a,&nb);
-		getchar();	
-		printf("%d | >> %d bits | %d\n", a, nb, a>>nb);
-		printf("%d | >> %d bits | %d\n", a, nb, a>>nb );
-		}
-	if(p==6){
-		printf("Digite dois numeros\n");
-		scanf("%d\n%d",&a,&nb);
-		printf("%d | << %d bits | %d\n", a, nb, a<<nb);
-		printf("%d | << %d bits | %d\n", a, nb, a<<nb);
-		
-	}
-	
+	return 0;
 }
