@@ -53,7 +53,7 @@ int main(){
     Produto * produtos = (Produto *) calloc(1, sizeof(Produto));
     
     while(opt1 != 0){
-        printf("\n=-=-=-=-=MENU=-=-=-=-=\n");
+        printf("\n MENU \n");
         printf("Produtos em memoria: %d", np);
         printf("\n1. Consultar\n2. Cadastrar novo\n3. Carregar de arquivo para memoria (sobrescreve memoria)\n4. Salvar memoria em arquivo (sobrescreve arquivo)\n0. Sair\n> ");
         scanf("%d", &opt1);
