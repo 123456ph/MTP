@@ -1,8 +1,8 @@
 /*Paulo Henrique Marques Martins - 11711EEL033*/
 
 #include<stdio.h>
-#include<stdlib.h>
 #include<string.h>
+#include<stdlib.h>
 
 struct Dimensoes{
 	float largura, profundidade, altura;
@@ -16,7 +16,7 @@ struct Produto{
 
 void cadastrar(struct Produto Quant[], int i)
 {
-	scanf("%s", &Quant[i].nome);
+	scanf("%s", Quant[i].nome);
 	scanf("%f", &Quant[i].preco);
 	scanf("%f", &Quant[i].dimensoes.largura);
 	scanf("%f", &Quant[i].dimensoes.profundidade);
